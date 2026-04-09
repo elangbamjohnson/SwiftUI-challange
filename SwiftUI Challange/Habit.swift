@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Habit : Identifiable{
+struct Habit : Identifiable, Codable{
     let id = UUID()
     var title: String
     var isCompleted: Bool = false

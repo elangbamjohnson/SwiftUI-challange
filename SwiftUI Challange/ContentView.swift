@@ -13,6 +13,7 @@ struct ContentView: View {
     
     @StateObject private var viewModel = HabitViewModel()
     @State private var previousCount: Int = 0
+    @State private var habits: [Habit] = HabitStorage.load()
     
     var body: some View {
         
@@ -79,14 +80,13 @@ struct ContentView: View {
         
         VStack(spacing: 10) {
             
-            TextField("Enter new habit...", text: $viewModel.newHabitTitle)
+            TextField("Enter new Item...", text: $viewModel.newHabitTitle)
                 .textFieldStyle(.roundedBorder)
                 .textInputAutocapitalization(.words)
-            
             Button {
                 viewModel.addHabit()
             } label: {
-                Text("+ Add Habit")
+                Text("+ Add Item")
                     .frame(maxWidth: .infinity)
                     .padding()
                     .background(Color.blue)
@@ -122,8 +122,6 @@ struct HabitRow: View {
             } label: {
                 Image(systemName: isCompleted ? "checkmark.circle.fill" : "circle")
                     .foregroundColor(isCompleted ? .green : .gray)
-                    
-                    
             }
             .buttonStyle(.plain)
         }

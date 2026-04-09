@@ -9,12 +9,21 @@ import SwiftUI
 import Combine
 
 class HabitViewModel: ObservableObject {
-    @Published var habits: [Habit] = []
+    @Published var habits: [Habit] = [] {
+        didSet {
+            saveHabits()
+        }
+    }
     @Published var newHabitTitle: String = ""
+    
+    private let habitsKey = "saved_habits"
+    
+    init() {
+        loadHabits()
+    }
     
     func addHabit() {
         guard !newHabitTitle.trimmingCharacters(in: .whitespaces).isEmpty else { return }
-        
         withAnimation {
             habits.append(Habit(title: newHabitTitle, isCompleted: false))
         }
@@ -23,6 +32,20 @@ class HabitViewModel: ObservableObject {
     
     func deleteHabit(at offsets: IndexSet) {
         habits.remove(atOffsets: offsets)
+    }
+    
+    func saveHabits() {
+        if let encoded = try? JSONEncoder().encode(habits) {
+            UserDefaults.standard.set(encoded, forKey: habitsKey)
+        }
+    }
+    
+    func loadHabits() {
+        if let data = UserDefaults.standard.data(forKey: habitsKey) {
+            if let decoded = try? JSONDecoder().decode([Habit].self, from: data) {
+                habits = decoded
+            }
+        }
     }
     
     var isAddButtonDisabled: Bool {
