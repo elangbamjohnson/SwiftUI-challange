@@ -11,8 +11,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var habits: [Habit] = []
-    @State private var newHabitTitle: String = ""
+    @StateObject private var viewModel = HabitViewModel()
     
     var body: some View {
         
@@ -31,7 +30,7 @@ struct ContentView: View {
                             .font(.subheadline)
                             .foregroundColor(.gray)
                         
-                        Text("John")
+                        Text("Jereme")
                             .font(.title)
                             .bold()
                     }
@@ -42,9 +41,9 @@ struct ContentView: View {
                 
                 ScrollView {
                     VStack(spacing: 10) {
-                        ForEach($habits) { $habit in
+                        ForEach($viewModel.habits) { $habit in
                             HabitRow(
-                                title: habit.title,
+                                title: $habit.wrappedValue.title,
                                 isCompleted: $habit.isCompleted
                             )
                         }
@@ -65,12 +64,12 @@ struct ContentView: View {
         
         VStack(spacing: 10) {
             
-            TextField("Enter new habit...", text: $newHabitTitle)
+            TextField("Enter new habit...", text: $viewModel.newHabitTitle)
                 .textFieldStyle(.roundedBorder)
                 .textInputAutocapitalization(.words)
             
             Button {
-                addHabit()
+                viewModel.addHabit()
             } label: {
                 Text("+ Add Habit")
                     .frame(maxWidth: .infinity)
@@ -79,20 +78,10 @@ struct ContentView: View {
                     .foregroundColor(.white)
                     .cornerRadius(10)
             }
-            .disabled(newHabitTitle.trimmingCharacters(in: .whitespaces).isEmpty)
+            .disabled(viewModel.isAddButtonDisabled)
         }
         .padding()
         
-    }
-    
-    func addHabit() {
-        guard !newHabitTitle.trimmingCharacters(in: .whitespaces).isEmpty else { return }
-        
-        withAnimation {
-            habits.append(Habit(title: newHabitTitle, isCompleted: false))
-        }
-        
-        newHabitTitle = ""
     }
 }
 
