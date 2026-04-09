@@ -18,8 +18,11 @@ class HabitViewModel: ObservableObject {
         withAnimation {
             habits.append(Habit(title: newHabitTitle, isCompleted: false))
         }
-        
         newHabitTitle = ""
+    }
+    
+    func deleteHabit(at offsets: IndexSet) {
+        habits.remove(atOffsets: offsets)
     }
     
     var isAddButtonDisabled: Bool {

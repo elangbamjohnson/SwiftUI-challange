@@ -12,50 +12,65 @@ import SwiftUI
 struct ContentView: View {
     
     @StateObject private var viewModel = HabitViewModel()
+    @State private var previousCount: Int = 0
     
     var body: some View {
         
-//        ScrollView {
-            VStack(alignment: .leading, spacing: 20) {
+        VStack(alignment: .leading, spacing: 20) {
+            
+            // Profile Section
+            HStack {
+                Image(systemName: "person.circle.fill")
+                    .resizable()
+                    .frame(width: 50, height: 50)
+                    .foregroundColor(.blue)
                 
-                // Profile Section
-                HStack {
-                    Image(systemName: "person.circle.fill")
-                        .resizable()
-                        .frame(width: 50, height: 50)
-                        .foregroundColor(.blue)
+                VStack(alignment: .leading) {
+                    Text("Welcome back,")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
                     
-                    VStack(alignment: .leading) {
-                        Text("Welcome back,")
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
-                        
-                        Text("Jereme")
-                            .font(.title)
-                            .bold()
-                    }
+                    Text("John Corner")
+                        .font(.title)
+                        .bold()
                 }
-                
-                Text("Today's Habits")
-                    .font(.headline)
-                
-                ScrollView {
-                    VStack(spacing: 10) {
+            }
+            ScrollViewReader { proxy in
+                List {
+                    Section (header: Text("Grocery List")) {
                         ForEach($viewModel.habits) { $habit in
                             HabitRow(
                                 title: $habit.wrappedValue.title,
                                 isCompleted: $habit.isCompleted
                             )
+                            .id(habit.id)
                         }
+                        .onDelete(perform: viewModel.deleteHabit)
                     }
                 }
+                
+                .onChange(of: viewModel.habits.count) { _, newCount in
+                    
+                    if newCount > previousCount {
+                        scrollToBottom(proxy: proxy)
+                    }
+                    previousCount = newCount
+                }
             }
-            .padding()
+        }
+        .padding()
         
         // 👇 THIS FIXES KEYBOARD ISSUE
         .safeAreaInset(edge: .bottom) {
             addHabitSection
                 .background(.ultraThinMaterial)
+        }
+    }
+    
+    func scrollToBottom(proxy: ScrollViewProxy) {
+        guard let last = viewModel.habits.last else { return }
+        withAnimation {
+            proxy.scrollTo(last.id, anchor: .bottom)
         }
     }
     
@@ -113,7 +128,6 @@ struct HabitRow: View {
             .buttonStyle(.plain)
         }
         .padding()
-        .background(Color.gray.opacity(0.1))
         .cornerRadius(20)
     }
 }
