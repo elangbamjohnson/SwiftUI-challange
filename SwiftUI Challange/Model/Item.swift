@@ -7,8 +7,9 @@
 
 import Foundation
 
-struct Habit : Identifiable, Codable{
-    let id = UUID()
+struct Item : Identifiable, Codable {
+    var id = UUID()
     var title: String
     var isCompleted: Bool = false
 }
+
