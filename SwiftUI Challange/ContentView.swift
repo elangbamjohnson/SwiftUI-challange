@@ -13,7 +13,6 @@ struct ContentView: View {
     
     @StateObject private var viewModel = HabitViewModel()
     @State private var previousCount: Int = 0
-    @State private var habits: [Habit] = HabitStorage.load()
     
     var body: some View {
         
