@@ -39,7 +39,7 @@ class CategoryViewModel: ObservableObject {
         }
     }
 
-    private func saveCategories() {
+    public func saveCategories() {
         CategoryStorage.save(categoryArray)
     }
 }

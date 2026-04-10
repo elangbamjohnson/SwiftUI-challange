@@ -43,13 +43,16 @@ struct ContentView: View {
                 // Use the ViewModel's categories
                 ForEach($viewModel.categoryArray) { $category in
                     NavigationLink {
-                        // Pass a CategoryDetailViewModel to the CategoryDetailView
-                        CategoryDetailView(viewModel: CategoryDetailViewModel(
-                            category: category,
-                            onCategoryChanged: { updatedCategory in
-                                viewModel.updateAndSaveCategory(updatedCategory)
-                            })
-                        )
+                        // Create the ViewModel and capture it to update the parent on disappear
+                        let detailViewModel = CategoryDetailViewModel(category: category)
+                        CategoryDetailView(viewModel: detailViewModel)
+                            .onDisappear {
+                                // Update the parent's category list with the modified one from the detail view
+                                if let index = viewModel.categoryArray.firstIndex(where: { $0.id == detailViewModel.category.id }) {
+                                    viewModel.categoryArray[index] = detailViewModel.category
+                                    viewModel.saveCategories()
+                                }
+                            }
                     } label: {
                         HStack {
                             Text(category.title)
