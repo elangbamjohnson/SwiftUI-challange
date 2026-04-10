@@ -18,6 +18,7 @@ struct CategoryDetailView: View {
                 HStack {
                     Text(viewModel.category.items[index].title)
                         .strikethrough(viewModel.category.items[index].isCompleted)
+                        .foregroundColor(viewModel.category.items[index].isCompleted ? .gray : .black)
                     Spacer()
                     
                     Button {

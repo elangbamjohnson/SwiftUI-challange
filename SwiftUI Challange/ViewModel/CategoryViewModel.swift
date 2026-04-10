@@ -8,15 +8,18 @@ import SwiftUI //Needed for remove(atOffsets: offsets)
      persistence). To allow SwiftUI views to observe and react to changes in this state, the
      CategoryViewModel class conforms to the ObservableObject protocol.
 */
+@MainActor
 class CategoryViewModel: ObservableObject {
     @Published var categoryArray: [Category] = []
+    private let storage: CategoryStorageProtocol
 
-    init() {
+    init(storage: CategoryStorageProtocol = CategoryStorage()) {
+        self.storage = storage
         loadCategories()
     }
 
     private func loadCategories() {
-        categoryArray = CategoryStorage.load()
+        categoryArray = storage.load()
     }
 
     func addCategory(title: String) {
@@ -31,15 +34,7 @@ class CategoryViewModel: ObservableObject {
         saveCategories()
     }
 
-    // This method is called by CategoryDetailViewModel when a category's properties change.
-    func updateAndSaveCategory(_ updatedCategory: Category) {
-        if let index = categoryArray.firstIndex(where: { $0.id == updatedCategory.id }) {
-            categoryArray[index] = updatedCategory
-            saveCategories()
-        }
-    }
-
     public func saveCategories() {
-        CategoryStorage.save(categoryArray)
+        storage.save(categoryArray)
     }
 }

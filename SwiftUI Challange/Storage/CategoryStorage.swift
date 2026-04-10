@@ -6,11 +6,16 @@
 //
 import Foundation
 
-struct CategoryStorage {
+protocol CategoryStorageProtocol {
+    func save(_ categories: [Category])
+    func load() -> [Category]
+}
+
+struct CategoryStorage: CategoryStorageProtocol {
     
-    private static let key = "categories_key"
+    private let key = "categories_key"
     
-    static func save(_ categories: [Category]) {
+    func save(_ categories: [Category]) {
         do {
             let data = try JSONEncoder().encode(categories)
             UserDefaults.standard.set(data, forKey: key)
@@ -19,7 +24,7 @@ struct CategoryStorage {
         }
     }
     
-    static func load() -> [Category] {
+    func load() -> [Category] {
         guard let data = UserDefaults.standard.data(forKey: key) else {
             return []
         }
