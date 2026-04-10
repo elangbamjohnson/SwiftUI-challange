@@ -48,6 +48,7 @@ struct ContentView: View {
             // MARK: - Add Button
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
+                    // This button will trigger the alert for adding a new category
                     Button {
                         showAddCategoryAlert = true
                     } label: {
@@ -55,9 +56,11 @@ struct ContentView: View {
                     }
                 }
             }
+            // Alert for adding a new category with a custom name
             .alert("Add New Category", isPresented: $showAddCategoryAlert) {
                 TextField("Category Name", text: $newCategoryTitle)
                 Button("Add") {
+                    // This calls the addCategory() function that uses the TextField's input
                     addCategory()
                 }
                 Button("Cancel", role: .cancel) { }
@@ -72,16 +75,16 @@ struct ContentView: View {
         }
     }
 
-    // MARK: - Add Category
+    // MARK: - Add Category (called from alert)
     func addCategory() {
         guard !newCategoryTitle.trimmingCharacters(in: .whitespaces).isEmpty else { return }
-
+        
         let newCategory = Category(
             id: UUID(),
-            title: newCategoryTitle,
+            title: newCategoryTitle, // Use the title from the TextField
             items: []
         )
-
+        
         withAnimation {
             categories.insert(newCategory, at: 0)
         }
@@ -99,4 +102,3 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
-

@@ -11,7 +11,6 @@ struct Category: Identifiable, Codable, Equatable {
     var title: String
     var items: [Item]
     
-    static func == (lhs: Category, rhs: Category) -> Bool {
-        lhs.id == rhs.id
-    }
+    // Synthesized Equatable will compare all properties, including items.
+    // This is crucial for SwiftUI to detect changes within the array.
 }

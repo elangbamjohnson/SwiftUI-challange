@@ -50,6 +50,7 @@ struct CategoryDetailView: View {
         .padding()
     }
     
+    //@MainActor
     func addItem() {
         guard !newItemTitle.trimmingCharacters(in: .whitespaces).isEmpty else { return }
         
@@ -59,6 +60,8 @@ struct CategoryDetailView: View {
             isCompleted: false
         )
         category.items.insert(newItem, at: 0)
+        
+        
         newItemTitle = ""
         
     }
