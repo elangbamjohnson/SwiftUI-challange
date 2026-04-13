@@ -10,7 +10,6 @@ struct Category: Identifiable, Codable, Equatable {
     let id: UUID
     var title: String
     var items: [Item]
-    
-    // Synthesized Equatable will compare all properties, including items.
-    // This is crucial for SwiftUI to detect changes within the array.
+    var iconName: String = "list.bullet"
+    var colorHex: String = "#007AFF"
 }
