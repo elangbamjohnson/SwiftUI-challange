@@ -22,7 +22,7 @@ struct ContentView: View {
      * Ownership: It signifies that ContentView owns this ViewModel. It's responsible for
      its creation and lifecycle.
      */
-    @StateObject private var viewModel = CategoryViewModel()
+    @State private var viewModel = CategoryViewModel()
     
     /*
      @State is used to manage value types (like structs, enums, Int, String, Bool) that are owned
@@ -65,16 +65,22 @@ struct ContentView: View {
                 .onDelete { indexSet in
                     viewModel.deleteCategory(at: indexSet) // Call ViewModel method
                 }
+                .onMove { source, destination in
+                    viewModel.moveCategory(from: source, to: destination)
+                }
             }
             
             .listStyle(.insetGrouped)
             .navigationTitle("Categories")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
+                    EditButton()
+                }
+                ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         showAddCategoryAlert = true
                     } label: {
-                        Image(systemName: "plus")
+                        Image(systemName: "plus") // Keep adding
                     }
                 }
             }

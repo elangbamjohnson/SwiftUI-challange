@@ -14,7 +14,7 @@ struct CategoryDetailView: View {
     var body: some View {
         List {
             // Use items from the ViewModel's category
-            ForEach(viewModel.category.items.indices, id: \.self) { index in
+            ForEach($viewModel.category.items.indices, id: \.self) { index in
                 HStack {
                     Text(viewModel.category.items[index].title)
                         .strikethrough(viewModel.category.items[index].isCompleted)
@@ -34,7 +34,13 @@ struct CategoryDetailView: View {
                 viewModel.deleteItem(at: indexSet) // Call ViewModel method
             }
         }
+       
         .navigationTitle(viewModel.category.title) // Use ViewModel's title
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                EditButton()
+            }
+        }
         .safeAreaInset(edge: .bottom) {
             addItemSection
                 .background(.ultraThinMaterial)

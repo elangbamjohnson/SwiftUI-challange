@@ -9,8 +9,9 @@ import SwiftUI //Needed for remove(atOffsets: offsets)
      CategoryViewModel class conforms to the ObservableObject protocol.
 */
 @MainActor
+@Observable
 class CategoryViewModel: ObservableObject {
-    @Published var categoryArray: [Category] = []
+    var categoryArray: [Category] = []
     private let storage: CategoryStorageProtocol
 
     init(storage: CategoryStorageProtocol = CategoryStorage()) {
@@ -36,5 +37,10 @@ class CategoryViewModel: ObservableObject {
 
     public func saveCategories() {
         storage.save(categoryArray)
+    }
+    
+    func moveCategory(from source:IndexSet, to destination: Int) {
+        categoryArray.move(fromOffsets: source, toOffset: destination)
+        saveCategories()
     }
 }
