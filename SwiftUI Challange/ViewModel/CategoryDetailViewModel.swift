@@ -26,8 +26,15 @@ class CategoryDetailViewModel: ObservableObject {
         }
     }
 
-    func toggleItemCompletion(itemIndex: Int) {
-        guard category.items.indices.contains(itemIndex) else { return }
-        category.items[itemIndex].isCompleted.toggle()
+    func toggleItemCompletion(item: Item) {
+        if let index = category.items.firstIndex(where: { $0.id == item.id }) {
+            category.items[index].isCompleted.toggle()
+        }
+    }
+
+    func moveItem(from source: IndexSet, to destination: Int) {
+        withAnimation {
+            category.items.move(fromOffsets: source, toOffset: destination)
+        }
     }
 }

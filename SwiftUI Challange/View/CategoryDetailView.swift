@@ -14,24 +14,27 @@ struct CategoryDetailView: View {
     var body: some View {
         List {
             // Use items from the ViewModel's category
-            ForEach($viewModel.category.items.indices, id: \.self) { index in
+            ForEach(viewModel.category.items) { item in
                 HStack {
-                    Text(viewModel.category.items[index].title)
-                        .strikethrough(viewModel.category.items[index].isCompleted)
-                        .foregroundColor(viewModel.category.items[index].isCompleted ? .gray : .black)
+                    Text(item.title)
+                        .strikethrough(item.isCompleted)
+                        .foregroundColor(item.isCompleted ? .gray : .black)
                     Spacer()
                     
                     Button {
                         // Call ViewModel method to toggle completion
-                        viewModel.toggleItemCompletion(itemIndex: index)
+                        viewModel.toggleItemCompletion(item: item)
                     } label: {
-                        Image(systemName: viewModel.category.items[index].isCompleted ? "checkmark.circle" : "circle")
+                        Image(systemName: item.isCompleted ? "checkmark.circle" : "circle")
                     }
                     .buttonStyle(.plain)
                 }
             }
             .onDelete { indexSet in
                 viewModel.deleteItem(at: indexSet) // Call ViewModel method
+            }
+            .onMove { source, destination in
+                viewModel.moveItem(from: source, to: destination)
             }
         }
        
