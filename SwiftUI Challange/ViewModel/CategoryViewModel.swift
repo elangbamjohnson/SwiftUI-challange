@@ -51,4 +51,18 @@ class CategoryViewModel {
             saveCategories()
         }
     }
+    
+    // Statistics for the dashboard
+    var totalItemsCount: Int {
+        categoryArray.reduce(0) { $0 + $1.items.count }
+    }
+    
+    var totalCompletedCount: Int {
+        categoryArray.reduce(0) { $0 + $1.items.filter { $0.isCompleted }.count }
+    }
+    
+    var completionPercentage: Double {
+        guard totalItemsCount > 0 else { return 0 }
+        return Double(totalCompletedCount) / Double(totalItemsCount)
+    }
 }

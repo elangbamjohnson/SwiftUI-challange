@@ -31,6 +31,7 @@ struct ContentView: View {
     @State private var newCategoryTitle: String = ""
     @State private var showAddCategoryAlert: Bool = false
     @State private var showRenameCategoryAlert: Bool = false
+    @State private var showDashboard: Bool = false
     @State private var renamingCategoryID: UUID?
     @State private var renamingCategoryTitle: String = ""
     
@@ -94,6 +95,13 @@ struct ContentView: View {
             .listStyle(.insetGrouped)
             .navigationTitle("Categories")
             .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        showDashboard = true
+                    } label: {
+                        Image(systemName: "chart.bar.fill")
+                    }
+                }
                 ToolbarItem(placement: .topBarTrailing) {
                     EditButton()
                 }
@@ -104,6 +112,9 @@ struct ContentView: View {
                         Image(systemName: "plus") // Keep adding
                     }
                 }
+            }
+            .sheet(isPresented: $showDashboard) {
+                DashboardView(viewModel: viewModel)
             }
             .alert("Add New Category", isPresented: $showAddCategoryAlert) {
                 TextField("Category Name", text: $newCategoryTitle)
