@@ -37,4 +37,11 @@ class CategoryDetailViewModel: ObservableObject {
             category.items.move(fromOffsets: source, toOffset: destination)
         }
     }
+
+    func renameItem(id: UUID, newTitle: String) {
+        guard !newTitle.trimmingCharacters(in: .whitespaces).isEmpty else { return }
+        if let index = category.items.firstIndex(where: { $0.id == id }) {
+            category.items[index].title = newTitle
+        }
+    }
 }

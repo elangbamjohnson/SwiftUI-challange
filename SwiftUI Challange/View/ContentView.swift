@@ -30,6 +30,9 @@ struct ContentView: View {
      */
     @State private var newCategoryTitle: String = ""
     @State private var showAddCategoryAlert: Bool = false
+    @State private var showRenameCategoryAlert: Bool = false
+    @State private var renamingCategoryID: UUID?
+    @State private var renamingCategoryTitle: String = ""
     
     var body: some View {
         NavigationStack {
@@ -60,6 +63,24 @@ struct ContentView: View {
                             Text("\(category.items.count)")
                                 .foregroundColor(.gray)
                         }
+                    }
+                    .swipeActions(edge: .trailing) {
+                        Button(role: .destructive) {
+                            if let index = viewModel.categoryArray.firstIndex(where: { $0.id == category.id }) {
+                                viewModel.deleteCategory(at: IndexSet(integer: index))
+                            }
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
+                        
+                        Button {
+                            renamingCategoryID = category.id
+                            renamingCategoryTitle = category.title
+                            showRenameCategoryAlert = true
+                        } label: {
+                            Label("Rename", systemImage: "pencil")
+                        }
+                        .tint(.orange)
                     }
                 }
                 .onDelete { indexSet in
@@ -93,6 +114,20 @@ struct ContentView: View {
                 Button("Cancel", role: .cancel) { }
             } message: {
                 Text("Please enter a name for your new category.")
+            }
+            .alert("Rename Category", isPresented: $showRenameCategoryAlert) {
+                TextField("New Category Name", text: $renamingCategoryTitle)
+                Button("Rename") {
+                    if let id = renamingCategoryID {
+                        viewModel.renameCategory(id: id, newTitle: renamingCategoryTitle)
+                    }
+                    renamingCategoryID = nil
+                }
+                Button("Cancel", role: .cancel) {
+                    renamingCategoryID = nil
+                }
+            } message: {
+                Text("Please enter a new name for the category.")
             }
         }
     }

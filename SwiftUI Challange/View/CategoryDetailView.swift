@@ -10,6 +10,9 @@ import SwiftUI
 struct CategoryDetailView: View {
     // Use StateObject for the ViewModel
     @StateObject var viewModel: CategoryDetailViewModel
+    @State private var showRenameItemAlert: Bool = false
+    @State private var renamingItemID: UUID?
+    @State private var renamingItemTitle: String = ""
 
     var body: some View {
         List {
@@ -18,7 +21,7 @@ struct CategoryDetailView: View {
                 HStack {
                     Text(item.title)
                         .strikethrough(item.isCompleted)
-                        .foregroundColor(item.isCompleted ? .gray : .black)
+                        .foregroundColor(item.isCompleted ? .gray : .primary)
                     Spacer()
                     
                     Button {
@@ -28,6 +31,24 @@ struct CategoryDetailView: View {
                         Image(systemName: item.isCompleted ? "checkmark.circle" : "circle")
                     }
                     .buttonStyle(.plain)
+                }
+                .swipeActions(edge: .trailing) {
+                    Button(role: .destructive) {
+                        if let index = viewModel.category.items.firstIndex(where: { $0.id == item.id }) {
+                            viewModel.deleteItem(at: IndexSet(integer: index))
+                        }
+                    } label: {
+                        Label("Delete", systemImage: "trash")
+                    }
+                    
+                    Button {
+                        renamingItemID = item.id
+                        renamingItemTitle = item.title
+                        showRenameItemAlert = true
+                    } label: {
+                        Label("Rename", systemImage: "pencil")
+                    }
+                    .tint(.orange)
                 }
             }
             .onDelete { indexSet in
@@ -47,6 +68,20 @@ struct CategoryDetailView: View {
         .safeAreaInset(edge: .bottom) {
             addItemSection
                 .background(.ultraThinMaterial)
+        }
+        .alert("Rename Item", isPresented: $showRenameItemAlert) {
+            TextField("New Item Name", text: $renamingItemTitle)
+            Button("Rename") {
+                if let id = renamingItemID {
+                    viewModel.renameItem(id: id, newTitle: renamingItemTitle)
+                }
+                renamingItemID = nil
+            }
+            Button("Cancel", role: .cancel) {
+                renamingItemID = nil
+            }
+        } message: {
+            Text("Please enter a new name for the item.")
         }
     }
     

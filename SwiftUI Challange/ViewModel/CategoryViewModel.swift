@@ -10,7 +10,7 @@ import SwiftUI //Needed for remove(atOffsets: offsets)
 */
 @MainActor
 @Observable
-class CategoryViewModel: ObservableObject {
+class CategoryViewModel {
     var categoryArray: [Category] = []
     private let storage: CategoryStorageProtocol
 
@@ -42,5 +42,13 @@ class CategoryViewModel: ObservableObject {
     func moveCategory(from source:IndexSet, to destination: Int) {
         categoryArray.move(fromOffsets: source, toOffset: destination)
         saveCategories()
+    }
+    
+    func renameCategory(id: UUID, newTitle: String) {
+        guard !newTitle.trimmingCharacters(in: .whitespaces).isEmpty else { return }
+        if let index = categoryArray.firstIndex(where: { $0.id == id }) {
+            categoryArray[index].title = newTitle
+            saveCategories()
+        }
     }
 }
