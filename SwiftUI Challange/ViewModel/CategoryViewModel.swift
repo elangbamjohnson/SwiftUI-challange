@@ -23,9 +23,9 @@ class CategoryViewModel {
         categoryArray = storage.load()
     }
 
-    func addCategory(title: String, iconName: String = "list.bullet", colorHex: String = "#007AFF") {
+    func addCategory(title: String) {
         guard !title.trimmingCharacters(in: .whitespaces).isEmpty else { return }
-        let newCategory = Category(id: UUID(), title: title, items: [], iconName: iconName, colorHex: colorHex)
+        let newCategory = Category(id: UUID(), title: title, items: [])
         categoryArray.insert(newCategory, at: 0)
         saveCategories()
     }
