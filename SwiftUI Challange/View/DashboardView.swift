@@ -1,7 +1,9 @@
 import SwiftUI
 
 struct DashboardView: View {
-    @ObservedObject var viewModel: CategoryViewModel
+    // Since CategoryViewModel uses @Observable, we should use it directly 
+    // or just pass it as a regular property if the view doesn't own it.
+    var viewModel: CategoryViewModel
 
     var body: some View {
         NavigationStack {

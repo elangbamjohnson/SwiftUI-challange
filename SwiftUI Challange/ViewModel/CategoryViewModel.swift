@@ -55,10 +55,22 @@ class CategoryViewModel {
     // Statistics for the dashboard
     var totalItemsCount: Int {
         categoryArray.reduce(0) { $0 + $1.items.count }
+//        var count = 0
+//        for category in categoryArray {
+//            count += category.items.count
+//        }
+//        return count
     }
     
     var totalCompletedCount: Int {
         categoryArray.reduce(0) { $0 + $1.items.filter { $0.isCompleted }.count }
+        
+        //Alternate logic for the above implementation
+//        var count = 0
+//        for category in categoryArray {
+//            count += category.items.filter { $0.isCompleted }.count
+//        }
+//        return count
     }
     
     var completionPercentage: Double {
