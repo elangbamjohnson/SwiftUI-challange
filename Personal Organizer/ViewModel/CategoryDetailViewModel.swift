@@ -1,4 +1,4 @@
-// SwiftUI Challange/ViewModel/CategoryDetailViewModel.swift
+// Personal Organizer/ViewModel/CategoryDetailViewModel.swift
 import Foundation
 import Combine
 import SwiftUI

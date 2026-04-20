@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  SwiftUI Challange
+//  Personal Organizer
 //
 //  Created by Johnson on 07/04/26.
 //

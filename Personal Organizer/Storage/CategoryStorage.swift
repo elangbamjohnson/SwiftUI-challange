@@ -1,6 +1,6 @@
 //
 //  CategoryStorage.swift
-//  SwiftUI Challange
+//  Personal Organizer
 //
 //  Created by Johnson on 09/04/26.
 //

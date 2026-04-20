@@ -1,6 +1,6 @@
 //
-//  SwiftUI_ChallangeApp.swift
-//  SwiftUI Challange
+//  Personal_OrganizerApp.swift
+//  Personal Organizer
 //
 //  Created by Johnson on 07/04/26.
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct SwiftUI_ChallangeApp: App {
+struct Personal_OrganizerApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

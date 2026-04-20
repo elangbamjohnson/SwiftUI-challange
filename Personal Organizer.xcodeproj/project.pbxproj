@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		2CDCAC052F84832C004DF22C /* SwiftUI Challange.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftUI Challange.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2CDCAC052F84832C004DF22C /* Personal Organizer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Personal Organizer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		2CDCAC072F84832C004DF22C /* SwiftUI Challange */ = {
+		2CDCAC072F84832C004DF22C /* Personal Organizer */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "SwiftUI Challange";
+			path = "Personal Organizer";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -32,7 +32,7 @@
 		2CDCABFC2F84832C004DF22C = {
 			isa = PBXGroup;
 			children = (
-				2CDCAC072F84832C004DF22C /* SwiftUI Challange */,
+				2CDCAC072F84832C004DF22C /* Personal Organizer */,
 				2CDCAC062F84832C004DF22C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -40,7 +40,7 @@
 		2CDCAC062F84832C004DF22C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2CDCAC052F84832C004DF22C /* SwiftUI Challange.app */,
+				2CDCAC052F84832C004DF22C /* Personal Organizer.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,9 +48,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2CDCAC042F84832C004DF22C /* SwiftUI Challange */ = {
+		2CDCAC042F84832C004DF22C /* Personal Organizer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2CDCAC102F848339004DF22C /* Build configuration list for PBXNativeTarget "SwiftUI Challange" */;
+			buildConfigurationList = 2CDCAC102F848339004DF22C /* Build configuration list for PBXNativeTarget "Personal Organizer" */;
 			buildPhases = (
 				2CDCAC012F84832C004DF22C /* Sources */,
 				2CDCAC022F84832C004DF22C /* Frameworks */,
@@ -61,13 +61,13 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				2CDCAC072F84832C004DF22C /* SwiftUI Challange */,
+				2CDCAC072F84832C004DF22C /* Personal Organizer */,
 			);
-			name = "SwiftUI Challange";
+			name = "Personal Organizer";
 			packageProductDependencies = (
 			);
-			productName = "SwiftUI Challange";
-			productReference = 2CDCAC052F84832C004DF22C /* SwiftUI Challange.app */;
+			productName = "Personal Organizer";
+			productReference = 2CDCAC052F84832C004DF22C /* Personal Organizer.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -85,7 +85,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2CDCAC002F84832C004DF22C /* Build configuration list for PBXProject "SwiftUI Challange" */;
+			buildConfigurationList = 2CDCAC002F84832C004DF22C /* Build configuration list for PBXProject "Personal Organizer" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -99,7 +99,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2CDCAC042F84832C004DF22C /* SwiftUI Challange */,
+				2CDCAC042F84832C004DF22C /* Personal Organizer */,
 			);
 		};
 /* End PBXProject section */
@@ -266,7 +266,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.airwatch.airwatchintegration.SwiftUI-Challange";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.airwatch.airwatchintegration.Personal-Organizer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -298,7 +298,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.airwatch.airwatchintegration.SwiftUI-Challange";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.airwatch.airwatchintegration.Personal-Organizer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -313,7 +313,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2CDCAC002F84832C004DF22C /* Build configuration list for PBXProject "SwiftUI Challange" */ = {
+		2CDCAC002F84832C004DF22C /* Build configuration list for PBXProject "Personal Organizer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2CDCAC0E2F848339004DF22C /* Debug */,
@@ -322,7 +322,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2CDCAC102F848339004DF22C /* Build configuration list for PBXNativeTarget "SwiftUI Challange" */ = {
+		2CDCAC102F848339004DF22C /* Build configuration list for PBXNativeTarget "Personal Organizer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2CDCAC112F848339004DF22C /* Debug */,

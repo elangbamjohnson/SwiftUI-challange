@@ -1,4 +1,4 @@
-// SwiftUI Challange/ViewModel/CategoryViewModel.swift
+// Personal Organizer/ViewModel/CategoryViewModel.swift
 import Foundation
 import Combine // Needed for ObservableObject
 import SwiftUI //Needed for remove(atOffsets: offsets)
